@@ -1,5 +1,7 @@
 import React from 'react';
-import axios from 'axios';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
+
+import FriendsForm from './FriendsForm';
 
 class LandingPage extends React.Component {
     state = {
@@ -12,12 +14,8 @@ class LandingPage extends React.Component {
 
     getData = () => {
         const token = window.localStorage.getItem('token');
-        axios
-        .get('http://localhost:5000/api/friends', {
-            headers: {
-                authorization: token
-            }
-        })
+        axiosWithAuth()
+        .get('/api/friends')
         .then(res => console.log(res))
         .catch(err => console.log('error at axios', err))
     };
@@ -25,7 +23,8 @@ class LandingPage extends React.Component {
     render() {
     return (
         <div>
-            <h3>Landing Page!</h3>
+            <h3>Friends!</h3>
+            <FriendsForm />
         </div>
     )
     }
