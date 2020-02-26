@@ -9,12 +9,12 @@ function App() {
     <Router>
       <div className="App">
         <nav>
-          <a>
+          <li>
             <Link to='/login'>Login</Link>
-          </a>
-          <a>
+          </li>
+          <li>
             <Link to='/protected'>Protected Page</Link>
-          </a>
+          </li>
         </nav>
         <h1>App js!</h1>
         <Login />

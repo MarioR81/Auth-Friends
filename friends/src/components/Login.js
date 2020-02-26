@@ -21,6 +21,7 @@ class Login extends React.Component {
 
     login = e => {
         e.preventDefault();
+        console.log('login func', this.state)
         axios
         .post('http://localhost:5000/api/friends', this.state.credentials)
         .then(res => console.log(res))
@@ -28,29 +29,29 @@ class Login extends React.Component {
     };
 
     render(){
-    return (
-        <>
-        <h2>Login Form</h2>
-            <form onSubmit={this.login}>
-                <input
-                    name='username'
-                    placeholder='Login'
-                    type='text'
-                    value={this.state.credentials.username}
-                    onChange={this.handleChange}
-                /><br/>
-                <input 
-                    name='password'
-                    placeholder='Password'
-                    type='password'
-                    value={this.state.credentials.password}
-                    onChange={this.handleChange}
-                />
-                <br/>
-                <button>Log In</button>
-                </form>        
-        </>
-    )
+        return (
+            <>
+            <h2>Login Form</h2>
+                <form onSubmit={this.login}>
+                    <input
+                        name='username'
+                        placeholder='Login'
+                        type='text'
+                        value={this.state.credentials.username}
+                        onChange={this.handleChange}
+                    /><br/>
+                    <input 
+                        name='password'
+                        placeholder='Password'
+                        type='password'
+                        value={this.state.credentials.password}
+                        onChange={this.handleChange}
+                    />
+                    <br/>
+                    <button>Log In</button>
+                    </form>        
+            </>
+        )
     }
 };
 
