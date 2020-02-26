@@ -21,37 +21,41 @@ class Login extends React.Component {
 
     login = e => {
         e.preventDefault();
-        console.log('login func', this.state)
+        // console.log('login func', this.state)
         axios
-        .post('http://localhost:5000/api/friends', this.state.credentials)
-        .then(res => console.log(res))
+        .post('http://localhost:5000/api/login', this.state.credentials)
+        .then(res => {
+            console.log('test', res, this.props)
+            window.localStorage.setItem('token', res.data.payload)
+            this.props.history.push('/landingPage')
+        })
         .catch(err => console.log('error at axios', err));
     };
 
     render(){
         return (
-            <>
+            <div>
             <h2>Login Form</h2>
                 <form onSubmit={this.login}>
                     <input
                         name='username'
-                        placeholder='Login'
                         type='text'
+                        placeholder='Login'
                         value={this.state.credentials.username}
                         onChange={this.handleChange}
                     /><br/>
                     <input 
                         name='password'
-                        placeholder='Password'
                         type='password'
+                        placeholder='Password'
                         value={this.state.credentials.password}
                         onChange={this.handleChange}
                     />
                     <br/>
                     <button>Log In</button>
                     </form>        
-            </>
-        )
+            </div>
+        );
     }
 };
 
