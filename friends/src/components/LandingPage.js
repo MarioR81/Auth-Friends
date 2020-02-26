@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 class LandingPage extends React.Component {
@@ -13,7 +13,7 @@ class LandingPage extends React.Component {
     getData = () => {
         const token = window.localStorage.getItem('token');
         axios
-        .get('http://localhost:/api/friends', {
+        .get('http://localhost:5000/api/friends', {
             headers: {
                 authorization: token
             }
