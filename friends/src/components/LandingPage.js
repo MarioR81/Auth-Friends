@@ -1,41 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 
-import FriendsList from './FriendsList';
-class LandingPage extends React.Component {
-    state = {
-        friends: []
-    };
+const LandingPage = () => {
+   const [state, setState] = useState([]);
 
-    componentDidMount() {
-        this.getData();
-    }
-
-    getData = () => {
-        const token = window.localStorage.getItem('token');
+   useEffect(() => {
         axiosWithAuth()
         .get('/api/friends')
         .then(res => {
-            console.log('axios', res.data)
-            this.setState(res.data)
-            // this.state.friends.map(friend => {
-
-            // })
+            setState(res.data)
         })
-        .catch(err => console.log('error at axios', err))
-    }
-    
+        .catch(err => console.log('error at axios', err.message))
+   }, []);
 
-    render() {
+    console.log(state);
+
     return (
         <div>
             <h3>Landing Page</h3>
-            <FriendsList props={this.state}/>
+
+
+            {state.map(friend => {
+                return (
+                    <div key={friend.id}>
+                        <h2>{friend.name}</h2>
+                        <h3>{friend.age}</h3>
+                        <h3>{friend.email}</h3>
+                    </div>
+                )
+            })}
             
         </div>
     )
-    }
 };
-
 
 export default LandingPage;
